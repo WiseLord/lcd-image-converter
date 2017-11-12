@@ -266,6 +266,9 @@
    <property name="text">
     <string>Resize...</string>
    </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+R</string>
+   </property>
   </action>
   <action name="actionFontChange">
    <property name="text">
