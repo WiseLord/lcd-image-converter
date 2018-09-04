@@ -22,7 +22,7 @@
 #include "idocument.h"
 #include "datacontainer.h"
 #include "bitmaphelper.h"
-
+#include <QDebug>
 namespace Operations
 {
 
@@ -54,6 +54,7 @@ bool ImageResize::prepare(const Data::Containers::IDocument *doc, const QStringL
 
 void ImageResize::applyDocument(Data::Containers::IDocument *doc, const QStringList &keys)
 {
+    qDebug() << "ImageResize::applyDocument";
   Q_UNUSED(doc)
   Q_UNUSED(keys)
 }
