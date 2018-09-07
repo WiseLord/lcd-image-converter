@@ -135,8 +135,8 @@ void ConverterHelper::pixelsData(
             point = convImage->pointAt(i);
           }
 
-          *width = qAbs(point.y() - point1.y()) + 1;
-          *height = convImage->pointsCount() / (*width);
+          *height = qAbs(point.y() - point1.y()) + 1;
+          *width = convImage->pointsCount() / (*height);
         }
         // unknown
         else {
