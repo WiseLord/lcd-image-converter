@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>400</height>
+    <width>640</width>
+    <height>480</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -35,7 +35,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>600</width>
+     <width>640</width>
      <height>20</height>
     </rect>
    </property>
@@ -163,10 +163,16 @@
    <property name="text">
     <string>New Image...</string>
    </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
   </action>
   <action name="actionNew_Font">
    <property name="text">
     <string>New Font...</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
    </property>
   </action>
   <action name="actionOpen">
@@ -190,7 +196,7 @@
     <string>Save As...</string>
    </property>
    <property name="shortcut">
-    <string notr="true"/>
+    <string notr="true">Ctrl+Shift+S</string>
    </property>
   </action>
   <action name="actionClose">
@@ -213,10 +219,16 @@
    <property name="text">
     <string>Flip Horizontal</string>
    </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+H</string>
+   </property>
   </action>
   <action name="actionImageFlip_Vertical">
    <property name="text">
     <string>Flip Vertical</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+M</string>
    </property>
   </action>
   <action name="actionImageRotate_90_Clockwise">
@@ -230,6 +242,9 @@
   <action name="actionImageRotate_180">
    <property name="text">
     <string>180</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
    </property>
   </action>
   <action name="actionImageRotate_90_Counter_Clockwise">
@@ -256,19 +271,20 @@
     <string notr="true">Ctrl+P</string>
    </property>
   </action>
-  <action name="actionSetupConversion">
-   <property name="text">
-    <string>Conversion...</string>
-   </property>
-  </action>
   <action name="actionImageImport">
    <property name="text">
     <string>Import...</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
    </property>
   </action>
   <action name="actionImageExport">
    <property name="text">
     <string>Export...</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
    </property>
   </action>
   <action name="actionImageResize">
@@ -283,15 +299,24 @@
    <property name="text">
     <string>Change...</string>
    </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
   </action>
   <action name="actionFontResize">
    <property name="text">
     <string>Resize...</string>
    </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
   </action>
   <action name="actionFontInverse">
    <property name="text">
     <string>Inverse</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
    </property>
   </action>
   <action name="actionAboutApp">
@@ -306,6 +331,9 @@
    <property name="text">
     <string>Conversion...</string>
    </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
   </action>
   <action name="actionLanguageDefault">
    <property name="checkable">
@@ -314,30 +342,48 @@
    <property name="text">
     <string>English</string>
    </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
   </action>
   <action name="actionRename">
    <property name="text">
     <string>Rename...</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
    </property>
   </action>
   <action name="actionFontPreview">
    <property name="text">
     <string>Preview...</string>
    </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
   </action>
   <action name="actionHomePage">
    <property name="text">
     <string>Home Page...</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
    </property>
   </action>
   <action name="actionFontToImage">
    <property name="text">
     <string>To Image</string>
    </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
   </action>
   <action name="actionConvert_All">
    <property name="text">
     <string>Convert All</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
    </property>
   </action>
   <action name="actionEdit_in_external_tool">
@@ -354,6 +400,9 @@
   <action name="actionExternal_editor">
    <property name="text">
     <string>External editor...</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
    </property>
   </action>
   <action name="actionImageShiftLeft">
@@ -408,6 +457,9 @@
    <property name="text">
     <string>Updates...</string>
    </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
   </action>
   <action name="actionEditCopy">
    <property name="text">
@@ -429,35 +481,56 @@
    <property name="text">
     <string>About Qt...</string>
    </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
   </action>
   <action name="actionImageTo_Grayscale">
    <property name="text">
     <string>To Grayscale</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+G</string>
    </property>
   </action>
   <action name="actionClose_All">
    <property name="text">
     <string>Close All</string>
    </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
   </action>
   <action name="actionImageOptimizeWidth">
    <property name="text">
     <string>Width</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+D</string>
    </property>
   </action>
   <action name="actionImageOptimizeHeight">
    <property name="text">
     <string>Height</string>
    </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
   </action>
   <action name="actionImageOptimizeSize">
    <property name="text">
     <string>Size</string>
    </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
   </action>
   <action name="actionFontOptimizeWidth">
    <property name="text">
     <string>Optimize width</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
    </property>
   </action>
  </widget>
