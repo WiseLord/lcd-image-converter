@@ -6,6 +6,7 @@
     <qresource prefix="/templates">
         <file alias="font_convert">font.tmpl</file>
         <file alias="image_convert">image.tmpl</file>
+        <file alias="font_amp_convert">font-amp.tmpl</file>
     </qresource>
     <qresource prefix="/text">
         <file alias="gpl3">gpl-3.0-standalone.html</file>
