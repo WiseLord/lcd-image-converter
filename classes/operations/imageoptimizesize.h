@@ -1,6 +1,6 @@
 /*
  * LCD Image Converter. Converts images and fonts for embedded applications.
- * Copyright (C) 2012 riuson
+ * Copyright (C) 2016 riuson
  * mailto: riuson@gmail.com
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,38 +17,40 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef ACTIONFONTHANDLERS_H
-#define ACTIONFONTHANDLERS_H
+#ifndef IMAGEOPTIMIZESIZE_H
+#define IMAGEOPTIMIZESIZE_H
 
 #include <QObject>
+#include "ioperation.h"
 
-#include "actionhandlersbase.h"
-
-namespace AppUI
-{
-namespace MenuHandlers
+namespace Operations
 {
 
-class ActionFontHandlers : public ActionHandlersBase
+class ImageOptimizeSize : public QObject, public IOperation
 {
   Q_OBJECT
+  Q_INTERFACES(Operations::IOperation)
+
 public:
-  explicit ActionFontHandlers(QObject *parent = 0);
-  virtual ~ActionFontHandlers() {}
+  enum class Mode {
+    None,
+    Width,
+    Height,
+    Size
+  };
+  explicit ImageOptimizeSize(QObject *parent = 0);
+  virtual ~ImageOptimizeSize() {}
 
-signals:
-  void imageCreated(QImage *image, const QString &documentName);
+  bool prepare(const Data::Containers::IDocument *doc, const QStringList &keys) Q_DECL_OVERRIDE;
+  void applyDocument(Data::Containers::IDocument *doc, const QStringList &keys) Q_DECL_OVERRIDE;
+  void applyItem(Data::Containers::IDocument *doc, const QString &itemKey) Q_DECL_OVERRIDE;
 
-public slots:
-  void fontChange_triggered();
-  void fontInverse_triggered();
-  void fontResize_triggered();
-  void fontOptimizeWidth_triggered();
-  void fontPreview_triggered();
-  void fontToImage_triggered();
+  void setMode(Mode mode);
+
+private:
+  Mode mMode;
 };
 
-} // namespace MenuHandlers
-} // namespace AppUI
+} // namespace Operations
 
-#endif // ACTIONFONTHANDLERS_H
+#endif // IMAGEOPTIMIZESIZE_H

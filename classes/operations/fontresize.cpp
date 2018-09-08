@@ -20,20 +20,18 @@
 #include "fontresize.h"
 #include "idocument.h"
 #include "datacontainer.h"
-#include <QDebug>
+
 namespace Operations
 {
 
 FontResize::FontResize(QWidget *parentWidget, QObject *parent)
   : ImageResize(parentWidget, parent)
 {
-    qDebug() << "A";
 }
 
 void FontResize::applyDocument(Data::Containers::IDocument *doc, const QStringList &keys)
 {
   Q_UNUSED(keys)
-    qDebug() << "FontResize::applyDocument";
 
   bool ok;
   int ascent = doc->dataContainer()->commonInfo("ascent").toInt(&ok);

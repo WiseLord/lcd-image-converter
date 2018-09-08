@@ -52,6 +52,9 @@ public slots:
   void shift_up_triggered();
   void shift_down_triggered();
   void inverse_triggered();
+  void optimize_width_triggered();
+  void optimize_height_triggered();
+  void optimize_size_triggered();
   void resize_triggered();
   void grayscale_triggered();
   void import_triggered();

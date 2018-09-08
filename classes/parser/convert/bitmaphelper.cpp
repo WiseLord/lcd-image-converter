@@ -150,6 +150,7 @@ void BitmapHelper::findEmptyArea(const QImage *source, int *left, int *top, int 
   int t = std::numeric_limits<int>::max();
   int r = 0;
   int b = 0;
+  bool picFound = false;
 
   // search from left/top to bottom/right
   for (int x = 0; x < source->width(); x++) {
@@ -159,14 +160,22 @@ void BitmapHelper::findEmptyArea(const QImage *source, int *left, int *top, int 
         t = qMin(t, y);
         r = qMax(r, x);
         b = qMax(b, y);
+        picFound = true;
       }
     }
   }
 
-  *left = l;
-  *top = t;
-  *right = source->width() - r;
-  *bottom = source->height() - b;
+  if (picFound) {
+    *left = l;
+    *top = t;
+    *right = source->width() - 1 - r;
+    *bottom = source->height() - 1 - b;
+  } else {
+    *left = 0;
+    *top = 0;
+    *right = 0;
+    *bottom = 0;
+  }
 }
 
 QImage BitmapHelper::scale(const QImage *source, int scale)
@@ -282,16 +291,16 @@ QColor BitmapHelper::detectBackgroundColor(const QImage *image)
   c4 += color4 == color2 ? 1 : 0;
   c4 += color4 == color3 ? 1 : 0;
 
-  int cmax = qMax(qMax(c1, c2), qMax(c3, c4));
+  int cmax = qMax(qMax(c3, c4), qMax(c1, c2));
 
-  if (cmax == c1) {
-    return color1;
-  } else if (cmax == c2) {
-    return color2;
-  } else if (cmax == c3) {
+  if (cmax == c3) {
     return color3;
-  } else {
+  } else if (cmax == c4) {
     return color4;
+  } else if (cmax == c1) {
+    return color1;
+  } else {
+    return color2;
   }
 }
 

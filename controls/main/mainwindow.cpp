@@ -231,6 +231,9 @@ void MainWindow::createHandlers()
   this->mImageHandlers->connect(this->ui->actionImageShiftUp, SIGNAL(triggered()), SLOT(shift_up_triggered()));
   this->mImageHandlers->connect(this->ui->actionImageShiftDown, SIGNAL(triggered()), SLOT(shift_down_triggered()));
   this->mImageHandlers->connect(this->ui->actionImageInverse, SIGNAL(triggered()), SLOT(inverse_triggered()));
+  this->mImageHandlers->connect(this->ui->actionImageOptimizeWidth, SIGNAL(triggered()), SLOT(optimize_width_triggered()));
+  this->mImageHandlers->connect(this->ui->actionImageOptimizeHeight, SIGNAL(triggered()), SLOT(optimize_height_triggered()));
+  this->mImageHandlers->connect(this->ui->actionImageOptimizeSize, SIGNAL(triggered()), SLOT(optimize_size_triggered()));
   this->mImageHandlers->connect(this->ui->actionImageResize, SIGNAL(triggered()), SLOT(resize_triggered()));
   this->mImageHandlers->connect(this->ui->actionImageTo_Grayscale, SIGNAL(triggered()), SLOT(grayscale_triggered()));
   this->mImageHandlers->connect(this->ui->actionImageImport, SIGNAL(triggered()), SLOT(import_triggered()));
@@ -240,6 +243,7 @@ void MainWindow::createHandlers()
   this->mFontHandlers = new MenuHandlers::ActionFontHandlers(this);
   this->mFontHandlers->connect(this->ui->actionFontChange, SIGNAL(triggered()), SLOT(fontChange_triggered()));
   this->mFontHandlers->connect(this->ui->actionFontInverse, SIGNAL(triggered()), SLOT(fontInverse_triggered()));
+  this->mFontHandlers->connect(this->ui->actionFontOptimizeWidth, SIGNAL(triggered()), SLOT(fontOptimizeWidth_triggered()));
   this->mFontHandlers->connect(this->ui->actionFontResize, SIGNAL(triggered()), SLOT(fontResize_triggered()));
   this->mFontHandlers->connect(this->ui->actionFontPreview, SIGNAL(triggered()), SLOT(fontPreview_triggered()));
   this->mFontHandlers->connect(this->ui->actionFontToImage, SIGNAL(triggered()), SLOT(fontToImage_triggered()));

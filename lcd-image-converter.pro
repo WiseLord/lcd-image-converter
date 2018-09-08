@@ -159,7 +159,8 @@ SOURCES += main.cpp \
     controls/setup/parts/reordering/setuptabreordering.cpp \
     controls/setup/parts/templates/setuptabtemplates.cpp \
     controls/start/starttab.cpp \
-    controls/updates/dialogupdates.cpp
+    controls/updates/dialogupdates.cpp \
+    classes/operations/imageoptimizesize.cpp
 
 HEADERS += \
     classes/action-handlers/actionedithandlers.h \
@@ -283,7 +284,8 @@ HEADERS += \
     interfaces/idocument.h \
     interfaces/ieditor.h \
     interfaces/imainwindow.h \
-    qt-version-check.h
+    qt-version-check.h \
+    classes/operations/imageoptimizesize.h
 
 FORMS += \
     controls/about/dialogabout.ui \

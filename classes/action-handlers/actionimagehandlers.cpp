@@ -26,6 +26,7 @@
 #include "imagerotate.h"
 #include "imageshift.h"
 #include "imageinverse.h"
+#include "imageoptimizesize.h"
 #include "imageresize.h"
 #include "imagegrayscale.h"
 #include "imageimport.h"
@@ -169,6 +170,45 @@ void ActionImageHandlers::inverse_triggered()
     docOp.setKeys(keys);
     Operations::ImageInverse imageInverse(this);
     docOp.apply(this->editor()->document(), imageInverse);
+  }
+}
+
+void ActionImageHandlers::optimize_width_triggered()
+{
+  if (this->editor() != nullptr) {
+    QStringList keys = this->editor()->selectedKeys();
+
+    Operations::DocumentOperator docOp(this);
+    docOp.setKeys(keys);
+    Operations::ImageOptimizeSize imageOptimizeSize(this);
+    imageOptimizeSize.setMode(Operations::ImageOptimizeSize::Mode::Width);
+    docOp.apply(this->editor()->document(), imageOptimizeSize);
+  }
+}
+
+void ActionImageHandlers::optimize_height_triggered()
+{
+  if (this->editor() != nullptr) {
+    QStringList keys = this->editor()->selectedKeys();
+
+    Operations::DocumentOperator docOp(this);
+    docOp.setKeys(keys);
+    Operations::ImageOptimizeSize imageOptimizeSize(this);
+    imageOptimizeSize.setMode(Operations::ImageOptimizeSize::Mode::Height);
+    docOp.apply(this->editor()->document(), imageOptimizeSize);
+  }
+}
+
+void ActionImageHandlers::optimize_size_triggered()
+{
+  if (this->editor() != nullptr) {
+    QStringList keys = this->editor()->selectedKeys();
+
+    Operations::DocumentOperator docOp(this);
+    docOp.setKeys(keys);
+    Operations::ImageOptimizeSize imageOptimizeSize(this);
+    imageOptimizeSize.setMode(Operations::ImageOptimizeSize::Mode::Size);
+    docOp.apply(this->editor()->document(), imageOptimizeSize);
   }
 }
 

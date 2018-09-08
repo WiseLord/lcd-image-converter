@@ -84,6 +84,14 @@
      <addaction name="actionImageShiftUp"/>
      <addaction name="actionImageShiftDown"/>
     </widget>
+    <widget class="QMenu" name="menuOptimizeSize">
+     <property name="title">
+      <string>Optimize size</string>
+     </property>
+     <addaction name="actionImageOptimizeWidth"/>
+     <addaction name="actionImageOptimizeHeight"/>
+     <addaction name="actionImageOptimizeSize"/>
+    </widget>
     <addaction name="actionImageFlip_Horizontal"/>
     <addaction name="actionImageFlip_Vertical"/>
     <addaction name="separator"/>
@@ -91,6 +99,7 @@
     <addaction name="menuRotate"/>
     <addaction name="actionImageResize"/>
     <addaction name="actionImageInverse"/>
+    <addaction name="menuOptimizeSize"/>
     <addaction name="actionImageTo_Grayscale"/>
     <addaction name="separator"/>
     <addaction name="actionImageImport"/>
@@ -105,6 +114,7 @@
     <addaction name="separator"/>
     <addaction name="actionFontResize"/>
     <addaction name="actionFontInverse"/>
+    <addaction name="actionFontOptimizeWidth"/>
     <addaction name="actionFontPreview"/>
     <addaction name="actionFontToImage"/>
    </widget>
@@ -310,11 +320,6 @@
     <string>Rename...</string>
    </property>
   </action>
-  <action name="actionFontMinimizeHeight">
-   <property name="text">
-    <string>Optimize height...</string>
-   </property>
-  </action>
   <action name="actionFontPreview">
    <property name="text">
     <string>Preview...</string>
@@ -433,6 +438,26 @@
   <action name="actionClose_All">
    <property name="text">
     <string>Close All</string>
+   </property>
+  </action>
+  <action name="actionImageOptimizeWidth">
+   <property name="text">
+    <string>Width</string>
+   </property>
+  </action>
+  <action name="actionImageOptimizeHeight">
+   <property name="text">
+    <string>Height</string>
+   </property>
+  </action>
+  <action name="actionImageOptimizeSize">
+   <property name="text">
+    <string>Size</string>
+   </property>
+  </action>
+  <action name="actionFontOptimizeWidth">
+   <property name="text">
+    <string>Optimize width</string>
    </property>
   </action>
  </widget>
