@@ -24,6 +24,7 @@
 #include <QPainterPath>
 #include <QPainterPathStroker>
 #include <QtSvg/QSvgRenderer>
+#include <QDebug>
 
 namespace Parsing
 {
@@ -178,12 +179,86 @@ void BitmapHelper::findEmptyArea(const QImage *source, int *left, int *top, int 
   }
 }
 
-QImage BitmapHelper::scale(const QImage *source, int scale)
+QImage BitmapHelper::scale(const QImage *source, int scale, bool smooth)
 {
   int width = source->width();
   int height = source->height();
 
   QImage result = source->scaled(width * scale, height * scale, Qt::KeepAspectRatio, Qt::FastTransformation);
+
+  QRgb background = BitmapHelper::detectBackgroundColor(source).rgba();
+
+  if (smooth && scale > 1) {
+    for (int16_t x = 0; x < width; x++) {
+      for (int16_t y = 0; y < height; y++) {
+        QRgb current = source->pixel(x, y);
+
+        if (current == background) {
+
+          // Check top left diagonal pixel
+          if (x > 0 && y > 0) {
+            QRgb top = source->pixel(x, y - 1);
+            QRgb left = source->pixel(x - 1, y);
+            QRgb topLeft = source->pixel(x - 1, y - 1);
+
+            if (left != background && top != background) {
+              for (int j = 0; j < scale - 1; j++) {
+                for (int i = 0; i < scale - 1 - j; i++) {
+                  result.setPixel(scale * x + i, scale * y + j, topLeft == background ? left : topLeft);
+                }
+              }
+            }
+          }
+
+          // Check top right diagonal pixel
+          if (x < width - 1 && y > 0) {
+            QRgb top = source->pixel(x, y - 1);
+            QRgb right = source->pixel(x + 1, y);
+            QRgb topRight = source->pixel(x + 1, y + 1);
+
+            if (right != background && top != background) {
+              for (int j = 0; j < scale - 1; j++) {
+                for (int i = 0; i < scale - 1 - j; i++) {
+                  result.setPixel(scale * x + (scale - 1) - i, scale * y + j, topRight == background ? right : topRight);
+                }
+              }
+            }
+          }
+
+          // Check bottom left diagonal pixel
+          if (x > 0 && y < height - 1) {
+            QRgb top = source->pixel(x, y + 1);
+            QRgb left = source->pixel(x - 1, y);
+            QRgb bottomLeft = source->pixel(x - 1, y + 1);
+
+            if (left != background && top != background) {
+              for (int j = 0; j < scale - 1; j++) {
+                for (int i = 0; i < scale - 1 - j; i++) {
+                  result.setPixel(scale * x + i, scale * y + (scale - 1) - j, bottomLeft == background ? left : bottomLeft);
+                }
+              }
+            }
+          }
+
+          // Check bottom right diagonal pixel
+          if (x < width - 1 && y < height - 1) {
+            QRgb bottom = source->pixel(x, y + 1);
+            QRgb right = source->pixel(x + 1, y);
+            QRgb bottomRight = source->pixel(x + 1, y + 1);
+
+            if (right != background && bottom != background) {
+              for (int j = 0; j < scale - 1; j++) {
+                for (int i = 0; i < scale - 1 - j; i++) {
+                  result.setPixel(scale * x + (scale - 1) - i, scale * y + (scale - 1) - j, bottomRight == background ? right : bottomRight);
+                }
+              }
+            }
+          }
+
+        }
+      }
+    }
+  }
 
   return result;
 }

@@ -35,6 +35,7 @@ ImageResize::ImageResize(QWidget *parentWidget, QObject *parent)
   this->mRight = 0;
   this->mBottom = 0;
   this->mScale = 1;
+  this->mSmooth = false;
 }
 
 bool ImageResize::prepare(const Data::Containers::IDocument *doc, const QStringList &keys)
@@ -43,9 +44,9 @@ bool ImageResize::prepare(const Data::Containers::IDocument *doc, const QStringL
   dialog.selectKeys(keys);
 
   if (dialog.exec() == QDialog::Accepted) {
-    dialog.resizeInfo(&this->mLeft, &this->mTop, &this->mRight, &this->mBottom, &this->mScale);
+    dialog.resizeInfo(&this->mLeft, &this->mTop, &this->mRight, &this->mBottom, &this->mScale, &this->mSmooth);
 
-    if (this->mLeft != 0 || this->mTop != 0 || this->mRight != 0 || this->mBottom != 0 || this->mScale != 1) {
+    if (this->mLeft != 0 || this->mTop != 0 || this->mRight != 0 || this->mBottom != 0 || this->mScale != 1 || this->mSmooth) {
       return true;
     }
   }
@@ -63,7 +64,7 @@ void ImageResize::applyItem(Data::Containers::IDocument *doc, const QString &ite
 {
   const QImage *original = doc->dataContainer()->image(itemKey);
   QImage cropped = Parsing::Conversion::BitmapHelper::crop(original, this->mLeft, this->mTop, this->mRight, this->mBottom, Parsing::Conversion::BitmapHelper::detectBackgroundColor(original));
-  QImage result = Parsing::Conversion::BitmapHelper::scale(&cropped, this->mScale);
+  QImage result = Parsing::Conversion::BitmapHelper::scale(&cropped, this->mScale, this->mSmooth);
   doc->dataContainer()->setImage(itemKey, &result);
 }
 

@@ -35,6 +35,7 @@ ImagesResizedProxy::ImagesResizedProxy(QObject *parent)
   this->mTop = 0;
   this->mBottom = 0;
   this->mScale = 1;
+  this->mSmooth = false;
 }
 
 QVariant ImagesResizedProxy::headerData(int section, Qt::Orientation orientation, int role) const
@@ -83,7 +84,7 @@ QVariant ImagesResizedProxy::data(const QModelIndex &index, int role) const
         QImage imageSource = result.value<QImage>();
         QColor backgroundColor = Parsing::Conversion::BitmapHelper::detectBackgroundColor(&imageSource);
         QImage imageCropped = Parsing::Conversion::BitmapHelper::crop(&imageSource, this->mLeft, this->mTop, this->mRight, this->mBottom, backgroundColor);
-        QImage imageScaled = Parsing::Conversion::BitmapHelper::scale(&imageCropped, this->mScale);
+        QImage imageScaled = Parsing::Conversion::BitmapHelper::scale(&imageCropped, this->mScale, this->mSmooth);
         result = imageScaled;
       }
 
@@ -147,7 +148,7 @@ QModelIndex ImagesResizedProxy::mapToSource(const QModelIndex &proxyIndex) const
   }
 }
 
-void ImagesResizedProxy::setCropScale(int left, int top, int right, int bottom, int scale)
+void ImagesResizedProxy::setCropScale(int left, int top, int right, int bottom, int scale, bool smooth)
 {
   emit this->beginResetModel();
 
@@ -156,6 +157,7 @@ void ImagesResizedProxy::setCropScale(int left, int top, int right, int bottom, 
   this->mRight = right;
   this->mBottom = bottom;
   this->mScale = scale;
+  this->mSmooth = smooth;
 
   emit this->endResetModel();
 }

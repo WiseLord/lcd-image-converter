@@ -63,11 +63,12 @@ DialogCanvasResize::DialogCanvasResize(Data::Containers::DataContainer *containe
 
   this->ui->tableView->setModel(this->mTranspose);
 
-  this->connect(this->ui->spinBoxLeft,   SIGNAL(valueChanged(int)), SLOT(spinBox_valueChanged(int)));
-  this->connect(this->ui->spinBoxTop,    SIGNAL(valueChanged(int)), SLOT(spinBox_valueChanged(int)));
-  this->connect(this->ui->spinBoxRight,  SIGNAL(valueChanged(int)), SLOT(spinBox_valueChanged(int)));
-  this->connect(this->ui->spinBoxBottom, SIGNAL(valueChanged(int)), SLOT(spinBox_valueChanged(int)));
-  this->connect(this->ui->spinBoxScaleImage, SIGNAL(valueChanged(int)), SLOT(spinBox_valueChanged(int)));
+  this->connect(this->ui->spinBoxLeft,   SIGNAL(valueChanged(int)), SLOT(resizeParamsUpdated(int)));
+  this->connect(this->ui->spinBoxTop,    SIGNAL(valueChanged(int)), SLOT(resizeParamsUpdated(int)));
+  this->connect(this->ui->spinBoxRight,  SIGNAL(valueChanged(int)), SLOT(resizeParamsUpdated(int)));
+  this->connect(this->ui->spinBoxBottom, SIGNAL(valueChanged(int)), SLOT(resizeParamsUpdated(int)));
+  this->connect(this->ui->spinBoxScaleImage, SIGNAL(valueChanged(int)), SLOT(resizeParamsUpdated(int)));
+  this->connect(this->ui->checkBoxScaleSmooth, SIGNAL(stateChanged(int)), SLOT(resizeParamsUpdated(int)));
   this->connect(this->ui->spinBoxScale,  SIGNAL(valueChanged(int)), this->mScaledProxy, SLOT(setScale(int)));
   this->connect(this->mScaledProxy, SIGNAL(scaleChanged(int)), SLOT(on_scaleChanged(int)));
 
@@ -76,6 +77,7 @@ DialogCanvasResize::DialogCanvasResize(Data::Containers::DataContainer *containe
   this->mRight = 0;
   this->mBottom = 0;
   this->mScale = 0;
+  this->mSmooth = false;
 
   int scale = Settings::ResizeSettings::scale();
   this->mScaledProxy->setScale(scale);
@@ -96,28 +98,31 @@ void DialogCanvasResize::selectKeys(const QStringList &keys)
   this->resizeToContents();
 }
 
-void DialogCanvasResize::resizeInfo(int *left, int *top, int *right, int *bottom, int* scale) const
+void DialogCanvasResize::resizeInfo(int *left, int *top, int *right, int *bottom, int* scale, bool *smooth) const
 {
   *left = this->mLeft;
   *top = this->mTop;
   *right = this->mRight;
   *bottom = this->mBottom;
   *scale = this->mScale;
+  *smooth = this->mSmooth;
 }
 
-void DialogCanvasResize::setResizeInfo(int left, int top, int right, int bottom, int scale)
+void DialogCanvasResize::setResizeInfo(int left, int top, int right, int bottom, int scale, bool smooth)
 {
   this->mLeft = left;
   this->mTop = top;
   this->mRight = right;
   this->mBottom = bottom;
   this->mScale = scale;
+  this->mSmooth = smooth;
 
   this->ui->spinBoxLeft->setValue(left);
   this->ui->spinBoxTop->setValue(top);
   this->ui->spinBoxRight->setValue(right);
   this->ui->spinBoxBottom->setValue(bottom);
   this->ui->spinBoxScaleImage->setValue(scale);
+  this->ui->checkBoxScaleSmooth->setChecked(smooth);
 }
 
 void DialogCanvasResize::wheelEvent(QWheelEvent *event)
@@ -142,7 +147,7 @@ void DialogCanvasResize::wheelEvent(QWheelEvent *event)
   }
 }
 
-void DialogCanvasResize::spinBox_valueChanged(int value)
+void DialogCanvasResize::resizeParamsUpdated(int value)
 {
   Q_UNUSED(value);
 
@@ -151,13 +156,15 @@ void DialogCanvasResize::spinBox_valueChanged(int value)
   this->mRight = this->ui->spinBoxRight->value();
   this->mBottom = this->ui->spinBoxBottom->value();
   this->mScale = this->ui->spinBoxScaleImage->value();
+  this->mSmooth = this->ui->checkBoxScaleSmooth->isChecked();
 
   this->mResizedProxy->setCropScale(
     this->mLeft,
     this->mTop,
     this->mRight,
     this->mBottom,
-    this->mScale);
+    this->mScale,
+    this->mSmooth);
 
   this->resizeToContents();
 }

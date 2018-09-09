@@ -53,7 +53,7 @@ public:
   static QImage flipVertical(const QImage *source);
   static QImage crop(const QImage *source, int left, int top, int right, int bottom, const QColor &backColor);
   static void findEmptyArea(const QImage *source, int *left, int *top, int *right, int *bottom);
-  static QImage scale(const QImage *source, int scale);
+  static QImage scale(const QImage *source, int scale, bool smooth = false);
   static QImage drawGrid(const QImage *source, int scale);
   static QImage drawSelection(const QImage *source, const QPainterPath &selectedPath, int scale);
   static QImage drawPixel(const QImage *source, int x, int y, const QColor &color);

@@ -864,22 +864,27 @@ Qt: %4</translation>
         <translation>Изменение размеров</translation>
     </message>
     <message>
-        <location filename="../controls/resize/dialogcanvasresize.ui" line="95"/>
+        <location filename="../controls/resize/dialogcanvasresize.ui" line="53"/>
         <source>Preview</source>
         <translation>Предпросмотр</translation>
     </message>
     <message>
-        <location filename="../controls/resize/dialogcanvasresize.ui" line="160"/>
+        <location filename="../controls/resize/dialogcanvasresize.ui" line="118"/>
         <source>Crop/Expand:</source>
         <translation>Обрезка:</translation>
     </message>
     <message>
-        <location filename="../controls/resize/dialogcanvasresize.ui" line="76"/>
+        <location filename="../controls/resize/dialogcanvasresize.ui" line="209"/>
+        <source>Smooth</source>
+        <translation>Сгладить</translation>
+    </message>
+    <message>
+        <location filename="../controls/resize/dialogcanvasresize.ui" line="34"/>
         <source>Scale:</source>
         <translation>Масштаб:</translation>
     </message>
     <message>
-        <location filename="../controls/resize/dialogcanvasresize.ui" line="131"/>
+        <location filename="../controls/resize/dialogcanvasresize.ui" line="138"/>
         <source>Reset</source>
         <translation>Сбросить</translation>
     </message>

@@ -46,6 +46,7 @@ protected:
   int mRight;
   int mBottom;
   int mScale;
+  bool mSmooth;
 };
 
 } // namespace Operations

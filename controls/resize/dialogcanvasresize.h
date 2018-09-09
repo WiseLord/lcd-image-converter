@@ -60,8 +60,8 @@ public:
   virtual ~DialogCanvasResize();
 
   void selectKeys(const QStringList &keys);
-  void resizeInfo(int *left, int *top, int *right, int *bottom, int *scale) const;
-  void setResizeInfo(int left, int top, int right, int bottom, int scale);
+  void resizeInfo(int *left, int *top, int *right, int *bottom, int *scale, bool *smooth) const;
+  void setResizeInfo(int left, int top, int right, int bottom, int scale, bool smooth);
 
 protected:
   void wheelEvent(QWheelEvent *event) Q_DECL_OVERRIDE;
@@ -82,9 +82,10 @@ private:
   int mRight;
   int mBottom;
   int mScale;
+  bool mSmooth;
 
 private slots:
-  void spinBox_valueChanged(int value);
+  void resizeParamsUpdated(int value);
   void on_pushButtonReset_clicked();
   void resizeToContents();
   void on_scaleChanged(int value);
