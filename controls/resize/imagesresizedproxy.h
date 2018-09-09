@@ -44,13 +44,14 @@ public:
   QModelIndex mapFromSource(const QModelIndex &sourceIndex) const Q_DECL_OVERRIDE;
   QModelIndex mapToSource(const QModelIndex &proxyIndex) const Q_DECL_OVERRIDE;
 
-  void setCrop(int left, int top, int right, int bottom);
+  void setCropScale(int left, int top, int right, int bottom, int scale);
 
 private:
   int mLeft;
   int mRight;
   int mTop;
   int mBottom;
+  int mScale;
 
   const QSize resized(const QSize &value) const;
 };

@@ -45,6 +45,7 @@ protected:
   int mTop;
   int mRight;
   int mBottom;
+  int mScale;
 };
 
 } // namespace Operations

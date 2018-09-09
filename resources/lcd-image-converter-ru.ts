@@ -816,12 +816,12 @@
 <context>
     <name>Data::Models::ImagesResizedProxy</name>
     <message>
-        <location filename="../controls/resize/imagesresizedproxy.cpp" line="48"/>
+        <location filename="../controls/resize/imagesresizedproxy.cpp" line="50"/>
         <source>Original size</source>
         <translation>Исходный размер</translation>
     </message>
     <message>
-        <location filename="../controls/resize/imagesresizedproxy.cpp" line="50"/>
+        <location filename="../controls/resize/imagesresizedproxy.cpp" line="52"/>
         <source>New size</source>
         <translation>Новый размер</translation>
     </message>
@@ -864,17 +864,22 @@ Qt: %4</translation>
         <translation>Изменение размеров</translation>
     </message>
     <message>
-        <location filename="../controls/resize/dialogcanvasresize.ui" line="70"/>
+        <location filename="../controls/resize/dialogcanvasresize.ui" line="95"/>
+        <source>Preview</source>
+        <translation>Предпросмотр</translation>
+    </message>
+    <message>
+        <location filename="../controls/resize/dialogcanvasresize.ui" line="160"/>
         <source>Crop/Expand:</source>
         <translation>Обрезка:</translation>
     </message>
     <message>
-        <location filename="../controls/resize/dialogcanvasresize.ui" line="89"/>
+        <location filename="../controls/resize/dialogcanvasresize.ui" line="76"/>
         <source>Scale:</source>
         <translation>Масштаб:</translation>
     </message>
     <message>
-        <location filename="../controls/resize/dialogcanvasresize.ui" line="125"/>
+        <location filename="../controls/resize/dialogcanvasresize.ui" line="131"/>
         <source>Reset</source>
         <translation>Сбросить</translation>
     </message>

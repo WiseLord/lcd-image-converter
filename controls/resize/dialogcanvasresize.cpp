@@ -67,6 +67,7 @@ DialogCanvasResize::DialogCanvasResize(Data::Containers::DataContainer *containe
   this->connect(this->ui->spinBoxTop,    SIGNAL(valueChanged(int)), SLOT(spinBox_valueChanged(int)));
   this->connect(this->ui->spinBoxRight,  SIGNAL(valueChanged(int)), SLOT(spinBox_valueChanged(int)));
   this->connect(this->ui->spinBoxBottom, SIGNAL(valueChanged(int)), SLOT(spinBox_valueChanged(int)));
+  this->connect(this->ui->spinBoxScaleImage, SIGNAL(valueChanged(int)), SLOT(spinBox_valueChanged(int)));
   this->connect(this->ui->spinBoxScale,  SIGNAL(valueChanged(int)), this->mScaledProxy, SLOT(setScale(int)));
   this->connect(this->mScaledProxy, SIGNAL(scaleChanged(int)), SLOT(on_scaleChanged(int)));
 
@@ -74,6 +75,7 @@ DialogCanvasResize::DialogCanvasResize(Data::Containers::DataContainer *containe
   this->mTop = 0;
   this->mRight = 0;
   this->mBottom = 0;
+  this->mScale = 0;
 
   int scale = Settings::ResizeSettings::scale();
   this->mScaledProxy->setScale(scale);
@@ -94,25 +96,28 @@ void DialogCanvasResize::selectKeys(const QStringList &keys)
   this->resizeToContents();
 }
 
-void DialogCanvasResize::resizeInfo(int *left, int *top, int *right, int *bottom) const
+void DialogCanvasResize::resizeInfo(int *left, int *top, int *right, int *bottom, int* scale) const
 {
   *left = this->mLeft;
   *top = this->mTop;
   *right = this->mRight;
   *bottom = this->mBottom;
+  *scale = this->mScale;
 }
 
-void DialogCanvasResize::setResizeInfo(int left, int top, int right, int bottom)
+void DialogCanvasResize::setResizeInfo(int left, int top, int right, int bottom, int scale)
 {
   this->mLeft = left;
   this->mTop = top;
   this->mRight = right;
   this->mBottom = bottom;
+  this->mScale = scale;
 
   this->ui->spinBoxLeft->setValue(left);
   this->ui->spinBoxTop->setValue(top);
   this->ui->spinBoxRight->setValue(right);
   this->ui->spinBoxBottom->setValue(bottom);
+  this->ui->spinBoxScaleImage->setValue(scale);
 }
 
 void DialogCanvasResize::wheelEvent(QWheelEvent *event)
@@ -145,12 +150,14 @@ void DialogCanvasResize::spinBox_valueChanged(int value)
   this->mTop = this->ui->spinBoxTop->value();
   this->mRight = this->ui->spinBoxRight->value();
   this->mBottom = this->ui->spinBoxBottom->value();
+  this->mScale = this->ui->spinBoxScaleImage->value();
 
-  this->mResizedProxy->setCrop(
+  this->mResizedProxy->setCropScale(
     this->mLeft,
     this->mTop,
     this->mRight,
-    this->mBottom);
+    this->mBottom,
+    this->mScale);
 
   this->resizeToContents();
 }
@@ -161,6 +168,7 @@ void DialogCanvasResize::on_pushButtonReset_clicked()
   this->ui->spinBoxTop->setValue(0);
   this->ui->spinBoxRight->setValue(0);
   this->ui->spinBoxBottom->setValue(0);
+  this->ui->spinBoxScaleImage->setValue(1);
 }
 
 void DialogCanvasResize::resizeToContents()
